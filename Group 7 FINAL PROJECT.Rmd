@@ -1,0 +1,80 @@
+---
+title: "Final project"
+date: "2023-01-04"
+output: html_document
+---
+```{r}
+browseURL("https://data.gov.tw/dataset/84007")
+```
+#DATA
+```{r}
+library(readr)
+restaurant1 <- read_csv("餐餐具到好餐廳.csv")
+```
+
+```{r}
+names(restaurant1)[c(2,4,5,7,11)] <-
+  c("restaurantˍtype","foodˍtype","name","district","discount")
+```
+我們程式的目的是根據臺中市各餐廳的數據，去找出各餐廳之(1)店家型態、(2)店家類型、(3)區域、(4)折扣方式、(5)店家名稱。
+
+```{r}
+View(restaurant1)
+```
+1)店家型態
+```{r food_type}
+range(restaurant1$foodˍtype)
+
+foodType <- function(){
+  cal <- list()
+  rstudioapi::showPrompt('', message="Input the type you want.") -> type
+foodType <- c()
+foodType <- 
+  restaurant1 |> subset(foodˍtype==type)
+cal$total <- length(foodType$name)
+View(foodType$name)
+cal
+}
+foodType()
+```
+2)店家類型
+```{r restaurantˍtype}
+restaurantType <-function(){
+  cal<-list()
+  rstudioapi::showPrompt('',message="Chain or not.\n(T or F)") -> status
+if(status){
+restaurantType <-  restaurant1|>
+  subset(restaurantˍtype == "連鎖")
+} else{
+restaurantType <- restaurant1 |>  subset(restaurantˍtype == "非連鎖")
+}
+cal$total<-length(restaurantType$name)
+View(restaurantType$name)
+cal
+}
+restaurantType()
+```
+3)區域
+```{r}
+library(readr)
+restaurant1 <-read_csv("C:/Users/Huang/Downloads/餐餐具到好餐廳.csv")
+restaurant = read.csv("C:/Users/Huang/Downloads/餐餐具到好餐廳.csv")
+subset(restaurant, 區域=="南區")
+```
+4)折扣方式
+```{r discount}
+library(readr)
+restaurant1 <-read_csv("C:/Users/Huang/Downloads/餐餐具到好餐廳.csv")
+restaurant = read.csv("C:/Users/Huang/Downloads/餐餐具到好餐廳.csv")
+subset(restaurant, 好康類型=="現金回饋")
+```
+5)店家名稱
+```{r}
+result<-list("對的咖啡")
+result[[1]]
+```
+
+
+
+
+
